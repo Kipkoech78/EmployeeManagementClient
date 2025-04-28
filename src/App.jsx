@@ -11,6 +11,8 @@ import ManagementHome from "./pages/management-view/home";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/authSlice";
 import { Skeleton } from "./components/ui/skeleton";
+import AdminHome from "./pages/admin/AdminHome";
+import AdminLayout from "./components/admin/layout";
 
 function App() {
   const { isAuthenticated, user, isLoading } = useSelector(
@@ -60,6 +62,19 @@ function App() {
           <Route path="listing" element={<ManagementTable />} />
          
         </Route>
+
+        <Route
+          path="/admin"
+          element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <AdminLayout />
+            </CheckAuth>
+          }
+        >
+          <Route path="dashboard" element={<AdminHome />} />
+          
+        </Route>
+
       </Routes>
     </div>
   );
